@@ -2,10 +2,19 @@
 @{
     ViewData["Title"] = "Test Index";
 }
+@section Styles
+{
+    <style>
+        .test {
+            color: orangered;
+        }
+    </style>
+}
+<partial name="_DivPartial" model="Model.PartialModel"/>
 <form asp-asp-controller="Test" asp-action="Index" method="post" asp-antiforgery="true">
     <div>
         <label asp-for="Name">Name: </label>
-        <input type="text" asp-for="Name"/>
+        <input type="text" asp-for="Name" class="myClass" />
     </div>
     <div>
         <label asp-for="Email">Email: </label>
@@ -13,8 +22,13 @@
     </div>
     <input type="submit" value="Submit" />
 </form>
-
+@section Scripts
+{
+     <script>
+         alert("Hello!!");
+     </script>
+}
 
 
 @* Html Helper  *@
-@* @Html.TextBoxFor(x=> x.Name); *@
+@* @Html.TextBoxFor(x=> x.Name,null,new {@class = "myClass"}); *@

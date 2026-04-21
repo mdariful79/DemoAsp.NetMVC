@@ -7,7 +7,12 @@ namespace DemoWeb.Controllers
     {
         public IActionResult Index()
         {
-            var model = new TestHome { Name = "Ariful Islam", Email = "ariful@gmail.com" };
+            var model = new TestHome 
+            { 
+                Name = "Ariful Islam", 
+                Email = "ariful@gmail.com",
+                PartialModel = new PartialModel { Address = "Ctg"}
+            };
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
