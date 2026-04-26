@@ -8,10 +8,10 @@ namespace DemoWeb.Controllers
     public class HomeController : Controller
     {
         private readonly IMembership _membership;
-        public HomeController([FromKeyedServices("Setup 2")] IMembership membership)
-        {
-            _membership = membership;
-        }
+        //public HomeController([FromKeyedServices("Setup 2")] IMembership membership)
+        //{
+        //    _membership = membership;
+        //}
         public IActionResult Index()
         {
             return View();
