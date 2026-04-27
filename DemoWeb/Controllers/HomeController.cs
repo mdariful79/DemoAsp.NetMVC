@@ -1,6 +1,7 @@
 using DemoWeb.Codes;
 using DemoWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using System.Diagnostics;
 
 namespace DemoWeb.Controllers
@@ -8,12 +9,15 @@ namespace DemoWeb.Controllers
     public class HomeController : Controller
     {
         private readonly IMembership _membership;
-        //public HomeController([FromKeyedServices("Setup 2")] IMembership membership)
-        //{
-        //    _membership = membership;
-        //}
+        private readonly ILogger<HomeController> _logger;
+        public HomeController([FromKeyedServices("Setup 2")] IMembership membership, ILogger<HomeController> logger)
+        {
+            _membership = membership;
+            _logger = logger;
+        }
         public IActionResult Index()
         {
+            Log.Debug("Iam in Home Page");
             return View();
         }
         public IActionResult CreateAccount()
