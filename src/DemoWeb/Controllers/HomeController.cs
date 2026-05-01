@@ -17,6 +17,11 @@ namespace DemoWeb.Controllers
         }
         public IActionResult Index()
         {
+            UnitOfWork uow = new UnitOfWork();
+            uow.Products.Add(new Product());
+            //uow.Order.Add(new Order());
+            uow.Save();
+
             Log.Debug("Iam in Home Page");
             return View();
         }
