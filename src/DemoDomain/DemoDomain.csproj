@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
+    <None Include="Contaracts\IUnitOfWork.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Contaracts\IUnitOfWork.cs" />
+    <Folder Include="Entities\" />
   </ItemGroup>
 
 </Project>
