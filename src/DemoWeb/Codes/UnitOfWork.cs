@@ -2,8 +2,13 @@
 {
     public class UnitOfWork
     {
-         public Repository<Product> Products { get; set; }
-       //public Repository<Order> Orders { get; set; }
+        public Repository<Product> Products { get; set; }
+
+        public UnitOfWork()
+        {
+            Products = new Repository<Product>();
+        }
+
         public void Save()
         {
 

@@ -6,7 +6,7 @@ namespace DemoDomain.Contaracts
 {
     public class IUnitOfWork
     {
-        void Save();
-        void SaveAsync();
+        //void Save();
+        //void SaveAsync();
     }
 }
