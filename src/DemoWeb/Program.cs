@@ -1,10 +1,13 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using DemoWeb;
 using DemoWeb.Codes;
 using DemoWeb.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using DemoInfrastructure.Extensions;
+
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.File("Logs/web-log-.log", rollingInterval: RollingInterval.Day)
@@ -15,6 +18,13 @@ try {
 
     // Add services to the container.
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+    #region Dependency Injection
+
+    builder.Services.AddInfrastructureDependency();
+
+    #endregion
+
 
     #region Serilog Configuration
     builder.Host.UseSerilog((context, lc) => lc
@@ -30,10 +40,10 @@ try {
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
         // Register your services with Autofac here
-        containerBuilder.RegisterType<Membership>().Keyed<IMembership>("Setup 1").InstancePerLifetimeScope().WithParameter("name", "Ariful");
-        containerBuilder.RegisterType<ImprovedMembership>().Keyed<IMembership>("Setup 2").SingleInstance();
+        //containerBuilder.RegisterType<Membership>().Keyed<IMembership>("Setup 1").InstancePerLifetimeScope().WithParameter("name", "Ariful");
+        //containerBuilder.RegisterType<ImprovedMembership>().Keyed<IMembership>("Setup 2").SingleInstance();
+        containerBuilder.RegisterModule(new WebModule(connectionString));
     });
-
     #endregion
 
     builder.Services.AddDbContext<ApplicationDbContext>(options =>

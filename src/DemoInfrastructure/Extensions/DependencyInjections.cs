@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Text;
@@ -7,9 +8,9 @@ namespace DemoInfrastructure.Extensions
 {
     public static class DependencyInjections
     {
-        public static ISelectionService AddInfrastructure(this ISelectionService services)
+        public static IServiceCollection AddInfrastructureDependency(this IServiceCollection services)
         {
-            Services.AddScoped<IMembership, ImprovedMembership>(); // one instance per per http life cyle or request
+            //Services.AddScoped<IMembership, ImprovedMembership>(); // one instance per per http life cyle or request
                                                                            //builder.Services.AddSingleton<IMembership, ImprovedMembership>(); // one instance for the entire application
                                                                            //builder.Services.AddTransient<IMembership, ImprovedMembership>(); // a new instance every time it's requested
 

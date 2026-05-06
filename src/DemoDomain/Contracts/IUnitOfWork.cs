@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DemoDomain.Contaracts
+namespace DemoDomain.Contracts
 {
-    public class IUnitOfWork
+    public interface IUnitOfWork
     {
         //void Save();
         //void SaveAsync();

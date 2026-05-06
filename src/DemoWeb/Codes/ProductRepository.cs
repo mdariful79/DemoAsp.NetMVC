@@ -20,4 +20,20 @@
         }
 
     }
+    public class ProductRepository : Repository<Product>
+    {
+        public List<Product> GetBestSellingProducts(int count)
+        {
+            throw new NotImplementedException();
+            //return c.Products.Where(p => p.TotalSales > 1000 && p.Stock>100);
+        }
+        public void AddPopularProducts(ProductRepository repository)
+        {
+            var popularProducts = repository.GetBestSellingProducts(10);
+            foreach (var product in popularProducts)
+            {
+                repository.Add(product);
+            }
+        }
+    }
 }
