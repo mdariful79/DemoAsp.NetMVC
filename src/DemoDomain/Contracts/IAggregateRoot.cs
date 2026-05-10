@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DemoDomain.Contaracts
+namespace DemoDomain.Contracts
 {
-    public interface IAggregateRoot<Tkey>
+    public interface IAggregateRoot<TKey>
     {
-        Tkey Id { get; set; }
+        TKey Id { get; set; }
     }
 }
