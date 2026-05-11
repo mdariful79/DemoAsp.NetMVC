@@ -10,8 +10,4 @@
     <None Include="Contracts\IUnitOfWork.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
-
 </Project>

@@ -11,9 +11,8 @@ namespace DemoWeb.Controllers
     {
       
         private readonly ILogger<HomeController> _logger;
-        public HomeController([FromKeyedServices("Setup 2")] IMembership membership, ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
-            
             _logger = logger;
         }
         public IActionResult Index()

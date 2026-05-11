@@ -6,7 +6,8 @@ namespace DemoWeb.Controllers
 {
     public class TestController : Controller
     {
-        private readonly IMembership _membership;
+
+        //private readonly IMembership _membership;
         //public TestController([FromKeyedServices("Setup 1")] IMembership membership)
         //{
         //    _membership = membership;
