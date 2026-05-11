@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using DemoApplication.Contracts;
+using DemoInfrastructure.Data;
+using DemoInfrastructure.Data.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
@@ -10,9 +13,13 @@ namespace DemoInfrastructure.Extensions
     {
         public static IServiceCollection AddInfrastructureDependency(this IServiceCollection services)
         {
-            //Services.AddScoped<IMembership, ImprovedMembership>(); // one instance per per http life cyle or request
-                                                                           //builder.Services.AddSingleton<IMembership, ImprovedMembership>(); // one instance for the entire application
-                                                                           //builder.Services.AddTransient<IMembership, ImprovedMembership>(); // a new instance every time it's requested
+            services.AddScoped<IApplicationUnitOfWork, ApplicationUnitOfWork>(); 
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            // one instance per per http life cyle or request                                                               
+            //Services.AddScoped<IMembership, ImprovedMembership>();// one instance per per http life cyle or request                                                                
+            //builder.Services.AddSingleton<IMembership, ImprovedMembership>(); // one instance for the entire application                                           
+            //builder.Services.AddTransient<IMembership, ImprovedMembership>(); // a new instance every time it's requested
 
             //builder.Services.AddKeyedScoped<IMembership, Membership>("Setup 1"); // Keyed used for using multiple implementations of the same interface, and you can specify which implementation to use based on a key. In this case, "Setup 1" is the key for the Membership implementation.
             //builder.Services.AddKeyedScoped<IMembership, ImprovedMembership>("Setup 2");
