@@ -1,3 +1,4 @@
+using DemoInfrastructure.Data;
 using DemoWeb.Codes;
 using DemoWeb.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,20 +9,16 @@ namespace DemoWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMembership _membership;
+      
         private readonly ILogger<HomeController> _logger;
         public HomeController([FromKeyedServices("Setup 2")] IMembership membership, ILogger<HomeController> logger)
         {
-            _membership = membership;
+            
             _logger = logger;
         }
         public IActionResult Index()
         {
-            UnitOfWork uow = new UnitOfWork();
-            uow.Products.Add(new Product());
-          //uow.Order.Add(new Order());
-            uow.Save();
-
+ 
             Log.Debug("Iam in Home Page");
             return View();
         }
@@ -34,7 +31,7 @@ namespace DemoWeb.Controllers
         public IActionResult CreateAccount(AccountModel model)
         {
 
-            _membership.CreateUserAccount(model.UserName, model.Password);
+            //_membership.CreateUserAccount(model.UserName, model.Password);
             return View(model);
         }
 

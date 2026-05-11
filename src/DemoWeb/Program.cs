@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using DemoInfrastructure.Extensions;
+using System.Reflection;
 
 
 Log.Logger = new LoggerConfiguration()
@@ -18,13 +19,13 @@ try {
 
     // Add services to the container.
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+    var maigrationAssembly = Assembly.GetAssembly(typeof(ApplicationDbContext));
 
     #region Dependency Injection
 
     builder.Services.AddInfrastructureDependency();
 
     #endregion
-
 
     #region Serilog Configuration
     builder.Host.UseSerilog((context, lc) => lc
@@ -46,8 +47,10 @@ try {
     });
     #endregion
 
-    builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString));
+    #region DbContext Configuration
+    builder.Services.AddDbContext(connectionString, maigrationAssembly);
+    #endregion
+
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
     builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
