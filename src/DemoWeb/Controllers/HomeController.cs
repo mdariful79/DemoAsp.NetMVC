@@ -1,3 +1,5 @@
+using DemoApplication.Contracts;
+using DemoDomain.Entities;
 using DemoInfrastructure.Data;
 using DemoWeb.Codes;
 using DemoWeb.Models;
@@ -9,16 +11,21 @@ namespace DemoWeb.Controllers
 {
     public class HomeController : Controller
     {
-      
+
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IApplicationUnitOfWork _unitOfWork;
+
+        public HomeController(IApplicationUnitOfWork unitOfWork, ILogger<HomeController> logger)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
+
         }
         public IActionResult Index()
         {
- 
-            Log.Debug("Iam in Home Page");
+            _unitOfWork.ProductRepository.Add(new Product { Id = Guid.NewGuid(), Name = "Test Product", Price = 1000 });
+            _unitOfWork.Save();
+            Log.Debug("I am in Home Controller");
             return View();
         }
         public IActionResult CreateAccount()

@@ -6,7 +6,7 @@ namespace DemoDomain.Contracts
 {
     public interface IUnitOfWork
     {
-        //void Save();
-        //void SaveAsync();
+        void Save();
+        Task SaveAsync();
     }
 }
