@@ -13,18 +13,15 @@ namespace DemoWeb.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
-        private readonly IApplicationUnitOfWork _unitOfWork;
+      
 
-        public HomeController(IApplicationUnitOfWork unitOfWork, ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _unitOfWork = unitOfWork;
-
         }
         public IActionResult Index()
         {
-            _unitOfWork.ProductRepository.Add(new Product { Id = Guid.NewGuid(), Name = "Test Product", Price = 1000 });
-            _unitOfWork.Save();
+            
             Log.Debug("I am in Home Controller");
             return View();
         }
