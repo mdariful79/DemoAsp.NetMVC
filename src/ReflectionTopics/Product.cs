@@ -9,9 +9,11 @@ namespace ReflectionTopics
         public string Name { get; set; }
         public double Price { get; set; }
 
-        public double GetDiscountedPrice(double discountPercentage)
+        public string Description { get; set; }
+
+        public double GetDiscountedPrice()
         {
-            return Price - (Price * discountPercentage / 100);
+            return Price * 0.9; // 10% discount
         }
 
 
