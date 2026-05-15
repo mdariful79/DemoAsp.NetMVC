@@ -17,5 +17,21 @@ namespace ReflectionTopics
         }
 
 
+
+        /*
+         * name: null,
+         * price: 0.0,
+         * description: null
+         * 
+         * 
+         * 
+         * 
+         */
+    }
+    class Dog
+    {
+        public string Name = "Buddy";
+        public void Bark() => Console.WriteLine("Woof!");
+        private void Secret() => Console.WriteLine("I ate the homework");
     }
 }
