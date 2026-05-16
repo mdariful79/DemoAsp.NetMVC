@@ -29,3 +29,18 @@ foreach (var group in numberGroup)
         }
     }
 }
+List<Employee> employees = new List<Employee>
+{
+    new Employee { Id = 1, Name = "Alice", Department = "HR", Salary = 60000 },
+    new Employee { Id = 2, Name = "Bob", Department = "IT", Salary = 75000 },
+    new Employee { Id = 3, Name = "Charlie", Department = "Finance", Salary = 80000 }
+};
+var result2 = from e in employees
+              where e.Salary > 70000
+              select new { e.Name, e.Department };
+
+Console.WriteLine("Employees with salary greater than 70000:");
+foreach (var employee in result2)
+{
+    Console.WriteLine($"Name: {employee.Name}, Department: {employee.Department}");
+} 
