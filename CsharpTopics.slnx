@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="OOP_Practice/OOP_Practice.csproj" Id="827cf3ba-e27e-4752-ba92-5a1017603baa" />
   <Project Path="src/LinqExample/LinqExample.csproj" Id="34778159-2306-4248-9e4f-607b637071f4" />
   <Project Path="src/ReflectionTopics/ReflectionTopics.csproj" Id="8f67807a-39e8-4bc2-a76d-a6708701669f" />
 </Solution>
