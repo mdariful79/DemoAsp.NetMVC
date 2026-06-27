@@ -8,7 +8,6 @@ namespace OOP_Practice.Delegation
     {
         public void Show(Order order)
         {
-            
             Console.WriteLine($"Price: {order.TotalPrice}");
         }
     }
