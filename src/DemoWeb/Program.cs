@@ -1,12 +1,15 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Cortex.Mediator.DependencyInjection;
+using DemoApplication.Features.Products.Command;
+using DemoInfrastructure.Data;
+using DemoInfrastructure.Extensions;
 using DemoWeb;
 using DemoWeb.Codes;
-using DemoInfrastructure.Data;
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using DemoInfrastructure.Extensions;
 using System.Reflection;
 
 
@@ -47,6 +50,26 @@ try {
     });
     #endregion
 
+    #region Cortex Mediator Configuration
+
+    builder.Services.AddCortexMediator(
+        new[] { typeof(Program), typeof(ProductAddCommand) },
+        options => options.AddDefaultBehaviors()
+    );
+    #endregion
+
+    #region Mapster Configuration
+
+    // Custom Configuration
+    //var config = TypeAdapterConfig.GlobalSettings;
+    //config.Scan(typeof(MapsterConfiguration).Assembly);
+    //builder.Services.AddSingleton(config);
+    //builder.Services.AddScoped<IMapper, ServiceMapper>();
+
+    // Default Configuration
+    builder.Services.AddMapster();
+
+    #endregion
     #region DbContext Configuration
     builder.Services.AddDbContext(connectionString, maigrationAssembly);
     #endregion

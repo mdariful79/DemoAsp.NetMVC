@@ -1,4 +1,6 @@
+using Cortex.Mediator;
 using DemoApplication.Contracts;
+using DemoApplication.Features.Products.Command;
 using DemoDomain.Entities;
 using DemoInfrastructure.Data;
 using DemoWeb.Codes;
@@ -13,15 +15,23 @@ namespace DemoWeb.Controllers
     {
 
         private readonly ILogger<HomeController> _logger;
-      
+        private readonly IMediator _mediator;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
         public IActionResult Index()
         {
-            
+            var command = new ProductAddCommand
+            {
+                Id = Guid.NewGuid(),
+                Name = "Sample Product",
+                Price = 99.99
+            };
+           var result = _mediator.SendCommandAsync(command).Result;
+
             Log.Debug("I am in Home Controller");
             return View();
         }
