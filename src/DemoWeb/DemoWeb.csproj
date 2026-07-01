@@ -31,4 +31,8 @@
     <ProjectReference Include="..\DemoInfrastructure\DemoInfrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
+  </ItemGroup>
+
 </Project>
