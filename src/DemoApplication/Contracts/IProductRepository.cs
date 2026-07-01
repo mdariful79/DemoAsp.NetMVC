@@ -1,4 +1,5 @@
-﻿using DemoDomain.Contracts;
+﻿using DemoApplication.Features.Products.Query;
+using DemoDomain.Contracts;
 using DemoDomain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,5 +9,7 @@ namespace DemoApplication.Contracts
 {
     public interface IProductRepository : IRepository<Product, Guid>
     {
+        Task<(IList<Product>, int, int)> GetPagedProducts(GetAllProductByPagingQuery query,
+            CancellationToken cancellationToken);
     }
 }
