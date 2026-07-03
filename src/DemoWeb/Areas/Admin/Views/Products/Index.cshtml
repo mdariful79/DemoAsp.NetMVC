@@ -13,6 +13,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="row">
         <div class="col-12">
+            <partial name="_ResponsePartial" />
             <div class="card">
                 <div class="card-header border-bottom">
                     <h5 class="card-title mb-0">View Products</h5>
@@ -21,7 +22,6 @@
                     <table id="products" class="table table-bordered table-hover w-100">
                         <thead>
                             <tr>
-                                <th>SL</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th></th>
@@ -29,14 +29,7 @@
                         </thead>
                         <tbody>
                         </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>SL</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th></th>
-                            </tr>
-                        </tfoot>
+                        
                     </table>
                 </div>
             </div>
@@ -72,7 +65,12 @@
         pagingType: "simple_numbers",
         ajax:{
         url: "/Admin/Products/GetPagedProducts",
-        type: "POST"
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: function(d){
+        return JSON.stringify(d);
+        }
         },
         columnDefs: [
         {

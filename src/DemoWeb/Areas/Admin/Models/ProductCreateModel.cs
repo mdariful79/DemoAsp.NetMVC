@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DemoWeb.Models
+namespace DemoWeb.Areas.Admin.Models
 {
-    public class CreateProductModel
+    public class ProductCreateModel
     {
         public Guid Id { get; set; }
 

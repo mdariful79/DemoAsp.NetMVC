@@ -1,8 +1,12 @@
 ﻿using Cortex.Mediator;
+using DemoApplication.Exceptions;
+using DemoApplication.Features.Products.Command;
 using DemoApplication.Features.Products.Query;
 using DemoDomain.Entities;
 using DemoDomain.Utilities;
+using DemoInfrastructure.Extensions;
 using DemoWeb.Areas.Admin.Models;
+using DemoWeb.Codes;
 using MapsterMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Web;
@@ -28,8 +32,69 @@ namespace DemoWeb.Areas.Admin.Controllers
             return View();
         }
 
+        public IActionResult Create()
+        {
+            var model = new ProductCreateModel();
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(ProductCreateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var command = _mapper.Map<ProductAddCommand>(model);
+                    var result = await _mediator.SendCommandAsync(command);
+
+                    TempData.Put(Constants.ResponseTempKey,
+                        new ResponseModel
+                        {
+                            Message = "Product successfully crated.",
+                            Type = ResponseTypes.Success
+                        });
+
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DuplicateDataException oex)
+                {
+                    TempData.Put(Constants.ResponseTempKey,
+                        new ResponseModel
+                        {
+                            Message = oex.Message,
+                            Type = ResponseTypes.Danger
+                        });
+                }
+                catch (Exception ex)
+                {
+                    const string errorMessage = "Failed to create product.";
+
+                    _logger.LogError(ex, errorMessage);
+
+                    TempData.Put(Constants.ResponseTempKey,
+                        new ResponseModel
+                        {
+                            Message = errorMessage,
+                            Type = ResponseTypes.Danger
+                        });
+                }
+            }
+            else
+            {
+                TempData.Put(Constants.ResponseTempKey,
+                    new ResponseModel
+                    {
+                        Message = "Please provide all information.",
+                        Type = ResponseTypes.Success
+                    });
+            }
+
+            return View(model);
+        }
+
         [HttpPost]
-        public async Task<JsonResult> GetPagedProducts([FromForm] ProductListModel model)
+        public async Task<JsonResult> GetPagedProducts([FromBody] ProductListModel model)
         {
             try
             {

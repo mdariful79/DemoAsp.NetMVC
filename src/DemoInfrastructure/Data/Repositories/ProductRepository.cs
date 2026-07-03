@@ -25,5 +25,9 @@ namespace DemoInfrastructure.Data.Repositories
                  true,
                  cancellationToken);
         }
+        public async Task<bool> IsDuplicateProductName(string name, CancellationToken cancellationToken)
+        {
+            return (await GetCountAsync(x => x.Name == name, cancellationToken)) > 0;
+        }
     }
 }

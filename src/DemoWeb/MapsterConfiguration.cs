@@ -1,6 +1,6 @@
 ﻿using DemoApplication.Features.Products.Command;
 using DemoDomain.Entities;
-using DemoWeb.Models;
+using DemoWeb.Areas.Admin.Models;
 using Mapster;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace DemoWeb
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<ProductAddCommand, Product>();
-            config.NewConfig<CreateProductModel, ProductAddCommand>();
+            config.NewConfig<ProductCreateModel, ProductAddCommand>();
         }
     }
 }
