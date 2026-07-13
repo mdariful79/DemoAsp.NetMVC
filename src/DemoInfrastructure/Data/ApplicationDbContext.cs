@@ -11,7 +11,7 @@ namespace DemoInfrastructure.Data
            ApplicationUserClaim,
            ApplicationUserRole,
            ApplicationUserLogin,
-           ApplicationRoleClaim,
+           ApplicationRoleClaim, 
            ApplicationUserToken>(options)
     {
         public DbSet<Product> Products { get; set; }

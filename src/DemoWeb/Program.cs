@@ -115,8 +115,7 @@ try {
         pattern: "{controller=Home}/{action=Index}/{id?}")
         .WithStaticAssets();
 
-    app.MapRazorPages()
-       .WithStaticAssets();
+
     Log.Information("Application Starting");
 
     app.Run();
