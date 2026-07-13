@@ -74,10 +74,14 @@ try {
     builder.Services.AddDbContext(connectionString, maigrationAssembly);
     #endregion
 
+    #region Identity Configuration
+    builder.Services.AddIdentity();
+    #endregion
+
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-    builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-        .AddEntityFrameworkStores<ApplicationDbContext>();
+    //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    //    .AddEntityFrameworkStores<ApplicationDbContext>();
     builder.Services.AddControllersWithViews();
 
     var app = builder.Build();
